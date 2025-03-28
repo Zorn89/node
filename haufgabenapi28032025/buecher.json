@@ -1,0 +1,5 @@
+[
+    { "id": 1, "titel": "Der Herr der Ringe", "autor": "J.R.R. Tolkien", "kategorie": "Fantasy" },
+    { "id": 2, "titel": "1984", "autor": "George Orwell", "kategorie": "Dystopie" },
+    { "id": 3, "titel": "Stolz und Vorurteil", "autor": "Jane Austen", "kategorie": "Roman" }
+  ]
