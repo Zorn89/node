@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Einfacher Buch-API-Client</title>
+</head>
+<body>
+  <h1>Buch-API-Client</h1>
+
+  <h2>Bücher anzeigen</h2>
+  <button onclick="getBooks()">Bücher abrufen</button>
+  <ul id="bookList"></ul>
+
+  <h2>Buch hinzufügen</h2>
+  <input type="text" id="newTitle" placeholder="Titel">
+  <input type="text" id="newAuthor" placeholder="Autor">
+  <button onclick="addBook()">Buch hinzufügen</button>
+
+  <script>
+    const bookList = document.getElementById("bookList");
+
+    async function getBooks() {
+      const response = await fetch("http://localhost:3000/books");
+      const books = await response.json();
+      bookList.innerHTML = "";
+      books.forEach((book) => {
+        const li = document.createElement("li");
+        li.textContent = `ID: ${book.id}, Titel: ${book.titel}, Autor: ${book.autor}`;
+        bookList.appendChild(li);
+      });
+    }
+
+    async function addBook() {
+      const title = document.getElementById("newTitle").value;
+      const author = document.getElementById("newAuthor").value;
+      const response = await fetch("http://localhost:3000/books", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ titel: title, autor: author }),
+      });
+      if (response.ok) {
+        getBooks();
+      } else {
+        alert("Fehler beim Hinzufügen des Buches.");
+      }
+    }
+  </script>
+</body>
+</html>
